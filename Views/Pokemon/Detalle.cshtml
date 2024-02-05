@@ -1,0 +1,11 @@
+﻿<h1>@Model.Name</h1>
+
+<img src="@Model.ImageUrl" alt="@Model.Name" style="float: right;">
+
+<h2>Habilidades</h2>
+<ul>
+    @foreach (var ability in Model.Abilities)
+    {
+        <li>@ability.Name</li>
+    }
+</ul>

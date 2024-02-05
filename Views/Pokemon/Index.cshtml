@@ -1,0 +1,49 @@
+﻿<style>
+    .pokemon-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .pokemon-card {
+        width: 200px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+        .pokemon-card a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+</style>
+
+<h1>Lista de Pokémon</h1>
+
+<ul class="pokemon-list">
+    @foreach (var pokemon in Model)
+    {
+        <li class="pokemon-card">
+            <a href="#" data-url="@Url.Action("Detalle", "Pokemon", new { name = pokemon.Name })" onclick="verificarInicioSesion(this)"> @pokemon.Name </a>
+        </li>
+    }
+</ul>
+
+<script>
+    function verificarInicioSesion(element) {
+        var usuarioIniciadoSesion = @User.Identity.IsAuthenticated.ToString().ToLower();
+
+        if (usuarioIniciadoSesion) {
+            window.location.href = element.getAttribute('data-url');
+        } else {
+            window.location.href = '/Identity/Account/Login';
+        }
+    }
+</script>
